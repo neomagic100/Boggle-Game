@@ -168,6 +168,25 @@ $(document).ready(function () {
   })();
   // end of const boggle = function()
 
+  // Add event listener so when enter is pressed while in text field, it is submitted the same as clicking button
+  $("#js-word").on("keypress", (e) => {
+    if (
+      e.key === "Enter" &&
+      document.getElementById("js-word") == document.activeElement
+    ) {
+      document.getElementById("js-enter-word").click();
+    }
+  });
+
+  // Add event listener so that when the button is clicked, the text field empties
+  $("#js-enter-word").on("click", () => {
+    let inputfield = document.getElementById("js-word");
+    if (inputfield.value.length > 0) {
+      inputfield.value = "";
+    }
+  });
+
+  // Call boggle init
   boggle.call(boggle.init, 4);
 });
 // end of $(document).ready(function()
@@ -181,13 +200,24 @@ var words = [];
 var idx = 0;
 
 function addWord() {
-  // update words array at index idx to the value of HTML element id "js-word"
-  words[idx] = document.getElementById("js-word").value;
-  // increment variable idx by one
-  idx++;
-  // update the value of HTML element id "js-word" to an empty string
-  words[idx] = "";
-  // call function displayWords, passing zero arguments
+  // Check to see if word already exists
+  if (words.includes(document.getElementById("js-word").value) === false) {
+    // update words array at index idx to the value of HTML element id "js-word"
+    words[idx] = document.getElementById("js-word").value;
+    // increment variable idx by one
+    idx++;
+    // update the value of HTML element id "js-word" to an empty string
+    words[idx] = "";
+    // call function displayWords, passing zero arguments
+  } else {
+    // Display duplicate warning for 2 seconds
+    $(".warn-duplicate")
+      .css("visibility", "visible")
+      .show()
+      .delay(2000)
+      .fadeOut();
+  }
+
   displayWords();
 }
 
