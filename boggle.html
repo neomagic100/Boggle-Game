@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Boggle</title>
+    <link rel="stylesheet" type="text/css" href="boggle.css" />
+    <script src="jquery-2.1.0.js"></script>
+    <script src="boggle.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="grid-9">
+        <div id="js-boggle" class="boggle"></div>
+
+        <input type="text" id="js-word" class="enter-word" />
+        <input
+          type="button"
+          id="js-enter-word"
+          class="btn"
+          value=" Enter "
+          onclick="addWord()"
+        />
+      </div>
+      <div class="grid-3">
+        <div>Words Found</div>
+        <div class="words-found" id="js-words-found"></div>
+      </div>
+    </div>
+  </body>
+</html>
